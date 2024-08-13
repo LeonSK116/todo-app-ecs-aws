@@ -8,7 +8,7 @@ import re
 import uuid
 from datetime import datetime
 
-dynamo = boto3.client('dynamodb', region_name='ca-central-1')
+dynamo = boto3.client('dynamodb', region_name='REGION')
 s3 = boto3.resource('s3')
 
 logger = logging.getLogger()
