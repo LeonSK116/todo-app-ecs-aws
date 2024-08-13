@@ -96,7 +96,7 @@ aws cloudformation create-stack --stack-name todo-app-ecs-web --template-body fi
 
 ```
 
-**Replace all necessary fields in the script.js file (see CloudFormation Outputs)**
+**Replace all necessary fields in the script.js file (see CloudFormation Outputs)  all the REPLACE_ME_XXXX ** 
 
 To get stack Outputs without going to the AWS console:
 
