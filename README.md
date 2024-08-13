@@ -31,11 +31,11 @@ AWS_ACCOUNT_ID=REPLACE_ME_ACCOUNT_ID
 
 # Main service
 cd backend/main-service
-docker build -t "$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-main-service:latest" --build-arg ARCH=amd64/ .
+podman build -t "$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-main-service:latest" --build-arg ARCH=amd64/ .
 
 # Attachments service
 cd ../attachments-service
-docker build -t "$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-files-service:latest" --build-arg ARCH=amd64/ .
+podman build -t "$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-files-service:latest" --build-arg ARCH=amd64/ .
 
 ```
 
@@ -43,7 +43,7 @@ docker build -t "$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/to
 
 ```
 # Authentification to ECR
-aws ecr get-login-password --region $REGION | docker login --username AWS --password-stdin "$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com"
+aws ecr get-login-password --region $REGION | podman login --username AWS --password-stdin "$AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com"
 
 # Repository pour le main service
 aws ecr create-repository --repository-name "$TODO_ECR_REPO/todo-main-service" --region $REGION
@@ -56,8 +56,8 @@ aws ecr create-repository --repository-name "$TODO_ECR_REPO/todo-files-service" 
 **Push Docker images to the registry**
 
 ```
-docker push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-main-service:latest
-docker push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-files-service:latest
+podman push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-main-service:latest
+podman push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-files-service:latest
 
 ```
 
