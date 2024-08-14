@@ -60,15 +60,20 @@ podman push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-ma
 podman push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-files-service:latest
 
 ```
+**Or you can just pull ready-to-use  image from repo**
 
+```
+podman pull quay.io/redhat_leonsk/todo-main-service
+podman pull quay.io/redhat_leonsk/todo-files-service
+
+```
 **Deploy the core-resources stack**
-
+#In case sam doesnt work, you may need to add Transform: AWS::Serverless-2016-10-31 under AWSTemplateFormatVersion in the template located at /.aws-sam/build
 ```
 # Create the keypair required to SSH onto the container instances
 aws ec2 create-key-pair --key-name todo-app-ecs-ec2-keypair --region $REGION > key-pair.json
 
 # Deploy the core-resources stack
-#In case sam doesnt work, you may need to add Transform: AWS::Serverless-2016-10-31 under AWSTemplateFormatVersion in the template located at /.aws-sam/build
 cd backend/core-resources
 sam build -t core-resources.yaml 
 sam deploy --guided --capabilities CAPABILITY_NAMED_IAM
@@ -98,8 +103,8 @@ aws cloudformation create-stack --stack-name todo-app-ecs-web --template-body fi
 ```
 
 **Replace all necessary fields in the script.js file (see CloudFormation Outputs)  all the REPLACE_ME_XXXX ** 
-todoApiEndpoint = https://xxxxx.yyy/dev/
-cognitoUserPoolClientId = App client ID
+- todoApiEndpoint = https://xxxxx.yyy/dev/
+- cognitoUserPoolClientId = App client ID
 To get stack Outputs without going to the AWS console:
 
 ```
