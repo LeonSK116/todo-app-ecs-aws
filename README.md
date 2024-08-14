@@ -98,7 +98,8 @@ aws cloudformation create-stack --stack-name todo-app-ecs-web --template-body fi
 ```
 
 **Replace all necessary fields in the script.js file (see CloudFormation Outputs)  all the REPLACE_ME_XXXX ** 
-
+todoApiEndpoint = https://xxxxx.yyy/dev/
+cognitoUserPoolClientId = App client ID
 To get stack Outputs without going to the AWS console:
 
 ```
