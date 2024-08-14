@@ -68,6 +68,7 @@ podman push $AWS_ACCOUNT_ID.dkr.ecr.$REGION.amazonaws.com/$TODO_ECR_REPO/todo-fi
 aws ec2 create-key-pair --key-name todo-app-ecs-ec2-keypair --region $REGION > key-pair.json
 
 # Deploy the core-resources stack
+#In case sam doesnt work, you may need to add Transform: AWS::Serverless-2016-10-31 under AWSTemplateFormatVersion in the template located at /.aws-sam/build
 cd backend/core-resources
 sam build -t core-resources.yaml 
 sam deploy --guided --capabilities CAPABILITY_NAMED_IAM
